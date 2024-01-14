@@ -181,6 +181,53 @@ use({
         end,
     })
 
+-- use({
+--         'lukas-reineke/indent-blankline.nvim',
+--         tag = 'v2.*',
+--         config = function()
+--             -- require('user/plugins/indent-blankline')
+--             require('indent_blankline').setup()
+--         end,
+--     })
+
+use({
+  'lukas-reineke/indent-blankline.nvim',
+   tag = 'v2.*',
+  config = function()
+      require('user/plugins/indent-blankline')
+  end,
+})
+
+-- Add a dashboard
+use({
+        'glepnir/dashboard-nvim',
+        config = function()
+            require('user/plugins/dashboard-nvim')
+        end
+    })
+
+
+use({
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup({
+                    current_line_blame = true,
+                })
+            vim.keymap.set('n', ']h', ':Gitsigns next_hunk<CR>')
+            vim.keymap.set('n', '[h', ':Gitsigns prev_hunk<CR>')
+            vim.keymap.set('n', 'gs', ':Gitsigns stage_hunk<CR>')
+            vim.keymap.set('n', 'gS', ':Gitsigns undo_stage_hunk<CR>')
+            vim.keymap.set('n', 'gp', ':Gitsigns preview_hunk<CR>')
+            vim.keymap.set('n', 'gb', ':Gitsigns blame_line<CR>')
+        end,
+    })
+
+-- Git Commands
+use({
+        'tpope/vim-fugitive',
+        requires = 'tpope/vim-rhubarb'
+    })
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
