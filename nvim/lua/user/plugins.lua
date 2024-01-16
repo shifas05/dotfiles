@@ -50,6 +50,8 @@ use({
             bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
         })
 
+    -- vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {fg = '#2F313C'})
+
     end,
 })
 
@@ -172,12 +174,22 @@ use({
     })
 
 
--- Status bar
 use({
         'nvim-lualine/lualine.nvim',
         requires = 'kyazdani42/nvim-web-devicons',
         config = function()
-            require('lualine').setup()
+            require('user/plugins/lualine')
+            -- require('lualine').setup()
+        end,
+    })
+
+
+use({
+        'akinsho/bufferline.nvim',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function()
+            require('user/plugins/bufferline')
+            -- require('bufferline').setup()
         end,
     })
 
@@ -228,6 +240,91 @@ use({
         requires = 'tpope/vim-rhubarb'
     })
 
+use({
+        'voldikss/vim-floaterm',
+        config = function()
+            vim.g.floaterm_width = 0.8
+            vim.g.floaterm_height = 0.8
+            vim.keymap.set('n', '<F1>', ':FloatermToggle<CR>')
+            vim.keymap.set('t', '<F1>', '<C-\\><C-n>:FloatermToggle<CR>')
+            vim.cmd([[
+            highlight link Floaterm CursorLine
+            highlight link FloatermBorder CursorLineBg
+                ]])
+        end
+    })
+
+-- Improved syntax highlighting
+use({
+  'nvim-treesitter/nvim-treesitter',
+  run = function()
+    require('nvim-treesitter.install').update({ with_sync = true })
+  end,
+  requires = {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    'nvim-treesitter/nvim-treesitter-textobjects',
+  },
+  config = function()
+    require('user/plugins/treesitter')
+    require('ts_context_commentstring').setup {}
+    vim.g.skip_ts_context_commentstring_module = true
+  end,
+})
+
+-- Language Server Protocol.
+use({
+  'neovim/nvim-lspconfig',
+  requires = {
+    'williamboman/mason.nvim',
+    'williamboman/mason-lspconfig.nvim',
+    'b0o/schemastore.nvim',
+    'jose-elias-alvarez/null-ls.nvim',
+    'jayp0521/mason-null-ls.nvim',
+    -- 'MunifTanjim/prettier.nvim',
+  },
+  config = function()
+    require('user/plugins/lspconfig')
+  end,
+})
+
+
+-- Completion
+use({
+  'hrsh7th/nvim-cmp',
+  requires = {
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
+    'onsails/lspkind-nvim',
+  },
+  config = function()
+    require('user/plugins/cmp')
+  end,
+})
+
+-- PHP Refactoring Tools
+use({
+  'phpactor/phpactor',
+  ft = 'php',
+  run = 'composer install --no-dev --optimize-autoloader',
+  config = function()
+    vim.keymap.set('n', '<Leader>pm', ':PhpactorContextMenu<CR>')
+    vim.keymap.set('n', '<Leader>pn', ':PhpactorClassNew<CR>')
+  end,
+})
+
+-- Project Configuration.
+use({
+  'tpope/vim-projectionist',
+  requires = 'tpope/vim-dispatch',
+  config = function()
+    require('user/plugins/projectionist')
+  end,
+})
+
 -- Automatically set up your configuration after cloning packer.nvim
 -- Put this at the end after all plugins
 if packer_bootstrap then
@@ -240,3 +337,11 @@ vim.cmd([[
     autocmd BufWritePost plugins.lua source <afile>
   augroup end
 ]])
+
+-- vim.diagnostic.config({
+--  virtual_text = true,
+--  signs = true,
+--  underline = true,
+--  update_in_insert = false,
+-- })
+
