@@ -15,7 +15,7 @@ require('bufferline').setup({
         },
       },
       separator_style = 'slant',
-      modified_icon = ' ',
+      modified_icon = '',
       custom_areas = {
         left = function()
           return {
@@ -32,7 +32,7 @@ require('bufferline').setup({
         bg = {attribute = 'bg', highlight = 'StatusLine'},
       },
       tab = {
-        bg = {attribute = 'bg', highlight = 'StatusLine'},
+        bg = {attribute = 'bg', highlight = 'StatusLineTerm'},
       },
       tab_close = {
         bg = {attribute = 'bg', highlight = 'StatusLine'},
@@ -75,6 +75,5 @@ require('bufferline').setup({
         fg = {attribute = 'bg', highlight = 'StatusLine'},
         bg = {attribute = 'bg', highlight = 'StatusLine'},
       },
-
-    }
+    },
   })

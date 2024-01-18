@@ -43,12 +43,14 @@ use({
                 bg = vim.api.nvim_get_hl_by_name('CursorLine', true).background,
         })
 
-    vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', {fg = '#30323E'})
+        vim.api.nvim_set_hl(0, 'NvimTreeIndentMarker', { fg = '#30323E' })
 
-    vim.api.nvim_set_hl(0, 'StatusLineNonText', {
-            fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
-            bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
+        vim.api.nvim_set_hl(0, 'StatusLineNonText', {
+          fg = vim.api.nvim_get_hl_by_name('NonText', true).foreground,
+          bg = vim.api.nvim_get_hl_by_name('StatusLine', true).background,
         })
+
+        vim.api.nvim_set_hl(0, 'IndentBlanklineChar', { fg = '#2F313C' })
 
     -- vim.api.nvim_set_hl(0, 'IndentBlanklineChar', {fg = '#2F313C'})
 
@@ -248,9 +250,9 @@ use({
             vim.keymap.set('n', '<F1>', ':FloatermToggle<CR>')
             vim.keymap.set('t', '<F1>', '<C-\\><C-n>:FloatermToggle<CR>')
             vim.cmd([[
-            highlight link Floaterm CursorLine
-            highlight link FloatermBorder CursorLineBg
-                ]])
+              highlight link Floaterm CursorLine
+              highlight link FloatermBorder CursorLineBg
+            ]])
         end
     })
 
